@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Ignore artifacts:
+build
+coverage
+
+
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
