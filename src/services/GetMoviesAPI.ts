@@ -30,7 +30,17 @@ export const getPopular = () => {
     `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
   );
 };
+export const getTop = () => {
+  return get<IDataResult>(
+    `movie/top_rated?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
+  );
+};
 
+export const getNow = () => {
+  return get<IDataResult>(
+    `movie/now_playing?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
+  );
+};
 /* const discoverMovies = async (
   sort?: string,
   page?: number | string,

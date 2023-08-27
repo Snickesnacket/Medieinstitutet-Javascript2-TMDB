@@ -3,7 +3,9 @@ import './assets/styles.scss';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Container from 'react-bootstrap/Container';
 import { Routes, Route } from 'react-router-dom';
-import PopularPage from './pages/tjosan';
+import PopularPage from './pages/Popular';
+import TopRated from './pages/TopRated';
+import PlayingNow from './pages/PLayingNow';
 
 function App() {
   return (
@@ -12,8 +14,8 @@ function App() {
       <Container>
         <Routes>
           <Route path="/PopularPage" element={<PopularPage />}></Route>
-          <Route></Route>
-          <Route></Route>
+          <Route path="/TopRatedPage" element={<TopRated />}></Route>
+          <Route path="/InTheatersNowPage" element={<PlayingNow />}></Route>
           <Route></Route>
           <Route></Route>
           <Route></Route>
