@@ -25,9 +25,9 @@ const get = async <T>(endpoint: string) => {
   return response.data as T;
 };
 
-export const getPopular = (page = 1) => {
+export const getPopular = () => {
   return get<IDataResult>(
-    `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=${page}`
+    `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
   );
 };
 

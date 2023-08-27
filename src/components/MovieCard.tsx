@@ -21,7 +21,7 @@ const MovieCard: React.FC<IMovieCardProp> = ({
   id
 }) => {
   return (
-    <Card className="m-2" style={{ width: '18rem' }}>
+    <Card className="m-2">
       <Card.Img
         variant="top"
         src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
