@@ -1,12 +1,12 @@
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { NavLink, Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { NavLink, Link } from 'react-router-dom';
 
 const Navigation = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="md">
-      <Container>
+    <Navbar className="navbar" bg="dark" variant="dark" expand="md">
+      <Container className="py-2">
         <Navbar.Brand as={Link} to="/">
           TMDB
         </Navbar.Brand>
@@ -21,18 +21,6 @@ const Navigation = () => {
             </Nav.Link>
             <Nav.Link as={NavLink} to="/InTheatersNowPage">
               In Theaters now
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/MoviePage">
-              Movies
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/PersonPage">
-              Actor/Actress
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/FeaturedInPage">
-              Featured in
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/NotFoundPage">
-              Featured in
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
