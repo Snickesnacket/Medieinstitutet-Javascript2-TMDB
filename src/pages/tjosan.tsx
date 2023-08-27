@@ -2,8 +2,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link, useSearchParams } from 'react-router-dom';
 import { getPopular } from '../services/GetMoviesAPI';
-import { Alert, ListGroup } from 'react-bootstrap';
-import { IMovie } from '../types/Movie.types';
+import { Alert, Container, ListGroup, Row } from 'react-bootstrap';
+import MovieCard from '../components/MovieCard';
 
 // Component definition
 const PopularPage = () => {
@@ -27,23 +27,25 @@ const PopularPage = () => {
     <>
       <h1>Popular</h1>
       {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
-
-      <ListGroup className="mb-6">
-        {data?.results.map((data) => (
-          <ListGroup.Item
-            action
-            as={Link}
-            key={data.id}
-            variant="success"
-            to={`/films/${data.id}`}
-          >
-            <h2 className="h3">{data.title}</h2>
-            <p className="text-muted small mb-0">
-              created: {data.release_date}
-            </p>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+      {data && (
+        <ListGroup className="mb-6">
+          <Container>
+            <Row>
+              {data?.results.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  poster_path={movie.poster_path!}
+                  title={movie.title!}
+                  overview={movie.overview!}
+                  release_date={movie.release_date!}
+                  vote_average={movie.vote_average!}
+                  id={movie.id!}
+                />
+              ))}
+            </Row>
+          </Container>
+        </ListGroup>
+      )}
     </>
   );
 };
