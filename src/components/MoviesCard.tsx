@@ -21,10 +21,12 @@ const MovieCard: React.FC<IMovieCardProp> = ({
 }) => {
   return (
     <Card className="m-2">
-      <Card.Img
-        variant="top"
-        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-      />
+      <Card.Link as={Link} to={`/movie/${id}`}>
+        <Card.Img
+          variant="top"
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+        />
+      </Card.Link>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{overview}</Card.Text>
@@ -33,6 +35,7 @@ const MovieCard: React.FC<IMovieCardProp> = ({
         <ListGroup.Item>Release Date: {release_date}</ListGroup.Item>
         <ListGroup.Item>Rating: {vote_average}</ListGroup.Item>
       </ListGroup>
+      <Card.Body></Card.Body>
     </Card>
   );
 };
