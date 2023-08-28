@@ -41,3 +41,5 @@ const MovieCard: React.FC<IMovieCardProp> = ({
     </Card>
   );
 };
+
+export default MovieCard;

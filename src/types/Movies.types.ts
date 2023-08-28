@@ -1,7 +1,9 @@
 import { IGenres } from './Genres.types';
 import { IPerson } from './Person.types';
 
-export interface IMovie {
+export interface IMovies {
+  adult?: boolean;
+  budget?: number;
   credits?: {
     cast?: IPerson[];
   };
@@ -10,8 +12,11 @@ export interface IMovie {
   id?: number;
   overview?: string | null;
   poster_path?: string | null;
-  runtime: number;
+  revenue?: number;
   release_date?: string;
+  similar?: {
+    results?: IMovies[];
+  };
   title?: string;
   vote_count?: number;
   vote_average?: number;

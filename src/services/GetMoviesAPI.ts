@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { IMovie } from '../types/Movie.types';
 import { IDataResult } from '../types/DataResult.types';
+import { IMovie } from '../types/Movie.types';
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const adultCont: string = '&include_adult=false';
-const creditsAndSimilar: string = '&append_to_response=credits,similar';
+const creditsAndSimilar: string = '&append_to_response=credits';
 
 const instance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
@@ -21,8 +21,14 @@ const instance = axios.create({
  * @returns Promise
  */
 const get = async <T>(endpoint: string) => {
-  const response = await instance.get(endpoint);
-  return response.data as T;
+  console.log('Requesting:', endpoint);
+  try {
+    const response = await instance.get(endpoint);
+    return response.data as T;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
 };
 
 export const getPopular = () => {
@@ -39,6 +45,12 @@ export const getTop = () => {
 export const getNow = () => {
   return get<IDataResult>(
     `movie/now_playing?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
+  );
+};
+
+export const getMovieId = (id: string) => {
+  return get<IMovie>(
+    `movie/${id}?api_key=${API_KEY}${adultCont}${creditsAndSimilar}&language=en-US`
   );
 };
 /* const discoverMovies = async (

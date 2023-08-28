@@ -1,8 +1,8 @@
-import { IMovie } from './Movie.types';
+import { IMovies } from './Movies.types';
 
 export interface IDataResult {
   page: number;
-  results: IMovie[];
+  results: IMovies[];
   total_pages: number;
   total_result: number;
 }

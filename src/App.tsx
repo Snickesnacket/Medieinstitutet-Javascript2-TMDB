@@ -5,7 +5,8 @@ import Container from 'react-bootstrap/Container';
 import { Routes, Route } from 'react-router-dom';
 import PopularPage from './pages/Popular';
 import TopRated from './pages/TopRated';
-import PlayingNow from './pages/PLayingNow';
+import InTheatre from './pages/PlayingNow';
+import TheMovie from './pages/MovieId';
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <Routes>
           <Route path="/PopularPage" element={<PopularPage />}></Route>
           <Route path="/TopRatedPage" element={<TopRated />}></Route>
-          <Route path="/InTheatersNowPage" element={<PlayingNow />}></Route>
-          <Route></Route>
+          <Route path="/InTheatersNowPage" element={<InTheatre />}></Route>
+          <Route path="/Movie/:id" element={<TheMovie />}></Route>
           <Route></Route>
           <Route></Route>
           <Route></Route>

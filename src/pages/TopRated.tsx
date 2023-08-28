@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTop } from '../services/GetMoviesAPI';
 import { Alert, Container, ListGroup, Row } from 'react-bootstrap';
-import MovieCard from '../components/MovieCard';
+import MovieCard from '../components/MoviesCard';
 
 const TopRated = () => {
   const { data, isError } = useQuery(['TopRatedPage'], () => getTop());

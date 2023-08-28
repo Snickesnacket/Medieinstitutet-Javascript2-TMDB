@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getNow } from '../services/GetMoviesAPI';
 import { Alert, Container, ListGroup, Row } from 'react-bootstrap';
-import MovieCard from '../components/MovieCard';
+import MovieCard from '../components/MoviesCard';
 
-const PlayingNow = () => {
+const InTheatre = () => {
   const { data, isError } = useQuery(['InTheatersNowPage'], () => getNow());
   return (
     <>
@@ -32,4 +32,4 @@ const PlayingNow = () => {
   );
 };
 
-export default PlayingNow;
+export default InTheatre;

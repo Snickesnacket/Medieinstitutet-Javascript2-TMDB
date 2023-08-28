@@ -1,16 +1,11 @@
-import { IMovie } from './Movie.types';
+import { IMovies } from './Movies.types';
 
 export interface IPerson {
-  also_known_as?: string[];
-  biography?: string;
-  birthday?: string;
-  character?: string;
-  credits?: {
-    cast?: IMovie[];
-  };
-  deathday?: string;
+  gender: number;
   id: number;
-  name?: string;
-  place_of_birth?: string;
-  profile_path?: string;
+  name: string;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
 }
