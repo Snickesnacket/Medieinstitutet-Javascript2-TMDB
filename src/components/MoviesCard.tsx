@@ -33,11 +33,6 @@ const MovieCard: React.FC<IMovieCardProp> = ({
         <ListGroup.Item>Release Date: {release_date}</ListGroup.Item>
         <ListGroup.Item>Rating: {vote_average}</ListGroup.Item>
       </ListGroup>
-      <Card.Body>
-        <Card.Link as={Link} to={`/movie/${id}`}>
-          Learn More
-        </Card.Link>
-      </Card.Body>
     </Card>
   );
 };

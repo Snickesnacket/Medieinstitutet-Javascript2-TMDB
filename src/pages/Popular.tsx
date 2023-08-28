@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPopular } from '../services/GetMoviesAPI';
 import { Alert, Container, ListGroup, Row } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
+import { Link } from 'react-router-dom';
 
 const PopularPage = () => {
   const { data, isError } = useQuery(['PopularPage'], () => getPopular());
@@ -14,15 +15,20 @@ const PopularPage = () => {
           <Container>
             <Row>
               {data?.results.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  poster_path={movie.poster_path!}
-                  title={movie.title!}
-                  overview={movie.overview!}
-                  release_date={movie.release_date!}
-                  vote_average={movie.vote_average!}
-                  id={movie.id!}
-                />
+                <Link
+                  to={`/movie/${movie.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <MovieCard
+                    key={movie.id}
+                    poster_path={movie.poster_path!}
+                    title={movie.title!}
+                    overview={movie.overview!}
+                    release_date={movie.release_date!}
+                    vote_average={movie.vote_average!}
+                    id={movie.id!}
+                  />
+                </Link>
               ))}
             </Row>
           </Container>
