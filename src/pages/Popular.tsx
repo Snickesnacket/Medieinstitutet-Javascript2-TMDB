@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPopular } from '../services/GetMoviesAPI';
+import { getPopular } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 

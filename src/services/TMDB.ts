@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { IDataResult } from '../types/DataResult.types';
 import { IMovie } from '../types/Movie.types';
+import { IGenresResponse } from '../types/Genres.types';
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const adultCont: string = '&include_adult=false';
@@ -53,17 +54,21 @@ export const getMovieId = (id: string) => {
     `movie/${id}?api_key=${API_KEY}${adultCont}${creditsAndSimilar}&language=en-US`
   );
 };
-/* const discoverMovies = async (
-  sort?: string,
-  page?: number | string,
-  genre_id?: number | string,
-  person_id?: number
-): Promise<IMovie> => {
-  const res = await axios.get(
-    `discover/movie?api_key=${API_KEY}&language=en-US&${sort}${adultCont}&page=${page}&with_genres=${genre_id}&with_cast=${person_id}`
+
+export const getGenre = async () => {
+  const data = await get<IGenresResponse>(
+    `genre/movie/list?api_key=${API_KEY}${adultCont}&language=en-USpage=1`
+  );
+  return data.genres;
+};
+//genre/movie/list?&include_adult=false&language=en-US&page=1
+/* 
+export const discoverMovies = async () => {
+  const res = await get<IGenres>(
+    `genre/movie/list?api_key=${API_KEY}${adultCont}&language=en-USpage=1`
   );
 
-  return res.data;
+  return res;
 }; */
 
 /**
