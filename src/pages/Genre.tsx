@@ -1,31 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
-import { getGenre } from '../services/TMDB';
+import { getGenres } from '../services/TMDB';
 import { Alert, Spinner } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { IGenres } from '../types/Genres.types';
+import { useState } from 'react';
 
 const GenrePage = () => {
-  const { data, isError, isFetching } = useQuery(['GenrePage'], () =>
-    getGenre()
-  );
+  const genres = useQuery(['GenrePage'], () => getGenres());
 
   return (
     <>
       <h1>Genres</h1>
-
-      {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
-
-      {isFetching ? (
+      {genres.isError && (
+        <Alert variant="warning">Ooops, something went wrong!</Alert>
+      )}
+      {genres.isFetching ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       ) : (
-        data?.map((genre: IGenres) => (
+        genres.data?.map((genre: IGenres) => (
           <Link
             key={genre.id}
             className="btn btn-outline-light btn-lg m-2"
             role="button"
-            to={`/genres/${genre.id}/${genre.name}`}
+            to={`/GenrePage/${genre.id}`}
             style={{ backgroundColor: 'darkgrey' }}
           >
             {genre.name}

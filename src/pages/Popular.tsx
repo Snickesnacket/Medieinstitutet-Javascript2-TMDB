@@ -9,6 +9,7 @@ const PopularPage = () => {
     <>
       <h1>TOP 20 POPULAR MOVIES</h1>
       {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
+
       {data && (
         <ListGroup className="mb-6">
           <Container>

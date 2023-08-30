@@ -11,7 +11,7 @@ interface IMovieCardProp {
   id: number;
 }
 
-const MovieCard: React.FC<IMovieCardProp> = ({
+export const MovieCard: React.FC<IMovieCardProp> = ({
   poster_path,
   title,
   overview,

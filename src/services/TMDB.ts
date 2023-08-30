@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { IDataResult } from '../types/DataResult.types';
+import { IDataResult, IDataResultGenre } from '../types/DataResult.types';
 import { IMovie } from '../types/Movie.types';
 import { IGenresResponse } from '../types/Genres.types';
+import { IMovies } from '../types/Movies.types';
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const adultCont: string = '&include_adult=false';
@@ -55,33 +56,26 @@ export const getMovieId = (id: string) => {
   );
 };
 
-export const getGenre = async () => {
+export const getGenres = async () => {
   const data = await get<IGenresResponse>(
     `genre/movie/list?api_key=${API_KEY}${adultCont}&language=en-USpage=1`
   );
   return data.genres;
 };
-//genre/movie/list?&include_adult=false&language=en-US&page=1
-/* 
-export const discoverMovies = async () => {
-  const res = await get<IGenres>(
-    `genre/movie/list?api_key=${API_KEY}${adultCont}&language=en-USpage=1`
+
+export const getGenre = async (id: string) => {
+  const data = await get<IDataResult>(
+    `discover/movie?api_key=${API_KEY}&language=en-US&region=US&$${adultCont}&page=1&with_genres=${id}`
   );
-
-  return res;
-}; */
-
-/**
- * @param {string} query Search query to search for
- * @param {number} page Page of search results to get
- * @returns Promise
- */
-// In your services/GetMoviesAPI.js
-
-/* export const getPopular = async (page = 1) => {
-  const res = await axios.get<IMovie>(
-    `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=${page}`
-  );
-  return res.data;
+  return data.results;
 };
- */
+/*  const discoverMovies = async (
+  page?: number | string,
+  genre_id?: number | string,
+): Promise<IDataResult> => {
+  const res = await axios.get(
+    `discover/movie?api_key=${API_KEY}&language=en-US&region=US&${sort}${adultCont}&page=${page}&with_genres=${genre_id}`
+  );
+
+  return res.data;
+};  */
