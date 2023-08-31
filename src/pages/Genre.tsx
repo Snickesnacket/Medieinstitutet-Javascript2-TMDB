@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGenres } from '../services/TMDB';
 import { Alert, Spinner } from 'react-bootstrap';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { IGenres } from '../types/Genres.types';
-import { useState } from 'react';
+
 
 const GenrePage = () => {
   const genres = useQuery(['GenrePage'], () => getGenres());
