@@ -3,7 +3,6 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { getGenre } from '../services/TMDB';
 import { Alert, Container, ListGroup,  Row, Spinner } from 'react-bootstrap';
 import { MovieCard } from '../components/MovieCard';
-import { useState } from 'react';
 import  Pagination  from '../components/Pageing'
 
 const MovieByGenre = () => {
