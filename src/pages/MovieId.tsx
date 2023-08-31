@@ -22,7 +22,7 @@ const TheMovie = () => {
 
   return (
     <>
-      {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
+      {isError && ( <Alert variant="warning">Ooops, something went wrong!</Alert>)}
       {data && (
         <ListGroup className="mb-6">
           <Container>

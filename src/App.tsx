@@ -1,4 +1,4 @@
-import Navigation from './components/Navigtion';
+import Navigation from './components/Navigation';
 import './assets/styles.scss';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Container from 'react-bootstrap/Container';

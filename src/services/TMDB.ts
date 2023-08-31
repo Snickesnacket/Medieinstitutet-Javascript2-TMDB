@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IDataResult, IDataResultGenre } from '../types/DataResult.types';
 import { IMovie } from '../types/Movie.types';
 import { IGenresResponse } from '../types/Genres.types';
-import { IMovies } from '../types/Movies.types';
+
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const adultCont: string = '&include_adult=false';

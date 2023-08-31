@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { getGenre } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
-import MoviesCard from '../components/MoviesCard';
+import { MovieCard } from '../components/MovieCard';
 
 const MovieByGenre = () => {
   const { id } = useParams() ?? '';
@@ -19,16 +19,17 @@ const MovieByGenre = () => {
       {data.isError && (
         <Alert variant="warning">Ooops, something went wrong!</Alert>
       )}
-      {data.isFetching ? (
+      {data.isFetching && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
-      ) : (
-        data.data?.map((movie) => (
+      )}
+      {data && (
           <ListGroup className="mb-6">
             <Container>
               <Row>
-                <MoviesCard
+        {data.data?.map((movie) => (
+                <MovieCard
                   key={movie.id}
                   poster_path={movie.poster_path!}
                   title={movie.title!}
@@ -37,10 +38,10 @@ const MovieByGenre = () => {
                   vote_average={movie.vote_average!}
                   id={movie.id!}
                 />
-              </Row>
+        ))}
+             </Row>
             </Container>
           </ListGroup>
-        ))
       )}
     </>
   );
@@ -48,30 +49,3 @@ const MovieByGenre = () => {
 
 export default MovieByGenre;
 
-/* 
-        SearchPage 
-	//* Keeping track of search query and page
-	const query = searchParams.get("query") ?? "";
-	const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
-
-	//* Data
-	const { data, isLoading, isError, error, isSuccess } = useSearch(page, query);
-
-	//* Click event to set params
-	const handleSearch = async (query: string) => {
-		setSearchParams({ page: "1", query });
-	};
-
-    HOOKS 
-    import { IGenres } from './../interfaces/IGenres';
-    import { useQuery } from '@tanstack/react-query';
-    import TMDB from '../services/TMDBAPI';
-
-    const useGenresList = () => {
-      return useQuery<IGenres[]>(['genres-list'], TMDB.getGenresList);
-    };
-
-    export default useGenresList;
-
- 
-   */
