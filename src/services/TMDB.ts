@@ -22,10 +22,9 @@ const instance = axios.create({
  * @param {string} endpoint Endpoint to HTTP GET
  * @returns Promise
  */
-const get = async <T>(endpoint: string) => {
-  console.log('Requesting:', endpoint);
+const get = async <T>(endpoint: string): Promise<T> => {
   try {
-    const response = await instance.get(endpoint);
+    const response = await instance.get<T>(endpoint);
     return response.data as T;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -63,19 +62,9 @@ export const getGenres = async () => {
   return data.genres;
 };
 
-export const getGenre = async (id: string) => {
+export const getGenre = async (id: string, page = 1) => {
   const data = await get<IDataResult>(
-    `discover/movie?api_key=${API_KEY}&language=en-US&region=US&$${adultCont}&page=1&with_genres=${id}`
+    `discover/movie?api_key=${API_KEY}&language=en-US&region=US&$${adultCont}&page=${page}&with_genres=${id}`
   );
-  return data.results;
+  return data
 };
-/*  const discoverMovies = async (
-  page?: number | string,
-  genre_id?: number | string,
-): Promise<IDataResult> => {
-  const res = await axios.get(
-    `discover/movie?api_key=${API_KEY}&language=en-US&region=US&${sort}${adultCont}&page=${page}&with_genres=${genre_id}`
-  );
-
-  return res.data;
-};  */

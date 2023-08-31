@@ -2,9 +2,9 @@ import { IGenreMovies } from './GenreMovies';
 import { IMovies } from './Movies.types';
 
 export interface IDataResult {
-  page?: number | string;
+  page: number;
   results: IMovies[];
-  total_pages?: number | undefined;
+  total_pages: number;
 }
 
 export interface IDataResultGenre {
