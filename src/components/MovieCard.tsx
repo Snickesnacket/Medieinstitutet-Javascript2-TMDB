@@ -16,7 +16,7 @@ export const MovieCard: React.FC<IMovieCardProp> = ({
   title,
   overview,
   release_date,
-  vote_average,
+  vote_average, 
   id
 }) => {
   return (

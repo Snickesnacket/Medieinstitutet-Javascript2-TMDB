@@ -24,6 +24,8 @@ const TheMovie = () => {
     <>
       {isError && ( <Alert variant="warning">Ooops, something went wrong!</Alert>)}
       {data && (
+        <>
+        <h1>{data.title}</h1>
         <ListGroup className="mb-6">
           <Container>
             <Row>
@@ -56,6 +58,7 @@ const TheMovie = () => {
           </Row>
           ;
         </ListGroup>
+        </>
       )}
     </>
   );

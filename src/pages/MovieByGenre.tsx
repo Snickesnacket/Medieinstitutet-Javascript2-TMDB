@@ -4,22 +4,20 @@ import { getGenre } from '../services/TMDB';
 import { Alert, Container, ListGroup,  Row, Spinner } from 'react-bootstrap';
 import { MovieCard } from '../components/MovieCard';
 import  Pagination  from '../components/Pageing'
+import { useState } from 'react';
 
 const MovieByGenre = () => {
+//const [page, setPage] = useState(1)
  const [searchParams, setSearchParams] = useSearchParams({idValue: '', page:'1'})
  const page = searchParams.get('page'|| "1")
  const pageNumber = Number(page)
+
   const { id } = useParams() ?? '';
   const idValue = id ?? '';
 
-
-  const data = useQuery(['GenrePage/:id', idValue, pageNumber], () => getGenre(idValue, pageNumber), {
+  const data = useQuery(['GenrePage/:id/',idValue, pageNumber], () => getGenre(idValue, pageNumber), {
     enabled: !!idValue, keepPreviousData: true
   });
-
-  console.log('the data', data.data);
-  console.log('id', idValue);
-
 
   return (
     <>
@@ -32,6 +30,9 @@ const MovieByGenre = () => {
         </Spinner>
       )}
       {data && (
+        <>
+        <h1>{idValue}</h1>
+
           <ListGroup className="mb-6">
             <Container>
               <Row>
@@ -49,6 +50,7 @@ const MovieByGenre = () => {
              </Row>
             </Container>
           </ListGroup>
+          </>
       )}
         {data.data && ( 
           <Pagination
