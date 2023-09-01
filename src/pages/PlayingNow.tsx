@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getNow } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
-import { MovieCard } from '../components/MovieCard';
+import MovieCard from '../components/MoviesCard';
 
 const InTheatre = () => {
   const { data, isError, isFetching } = useQuery(['InTheatersNowPage'], () => getNow());

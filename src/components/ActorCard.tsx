@@ -9,7 +9,7 @@ interface IActorCardProp {
   id: number, 
   known_for_department: string,
   name: string, 
-  profile_path: string, 
+  profile_path: string | null
 }
 
 export const ActorCard: React.FC<IActorCardProp> = ({
