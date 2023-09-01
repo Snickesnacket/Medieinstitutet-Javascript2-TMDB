@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { IDataResult} from '../types/DataResult.types';
 import { IMovie } from '../types/Movie.types';
+import { IActorResponse } from '../types/Actor';
 import { IGenresResponse } from '../types/Genres.types';
 
 
@@ -67,4 +68,11 @@ export const getGenre = async (id: string, page = 1) => {
     `discover/movie?api_key=${API_KEY}&language=en-US&region=US&$${adultCont}&page=${page}&with_genres=${id}`
   );
   return data
+};
+
+export const getActor = async (id: string) => {
+  return get<IActorResponse>(
+    `person/${id}?api_key=${API_KEY}&language=en-US&region=US&${adultCont}&append_to_response=credits`
+  );
+
 };
