@@ -1,34 +1,43 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { getGenre } from '../services/TMDB';
-import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
-import MoviesCard from '../components/MoviesCard';
+import { Alert, Container, ListGroup,  Row, Spinner } from 'react-bootstrap';
+import { MovieCard } from '../components/MovieCard';
+import  Pagination  from '../components/Pageing'
+import { useState } from 'react';
 
 const MovieByGenre = () => {
+//const [page, setPage] = useState(1)
+ const [searchParams, setSearchParams] = useSearchParams({idValue: '', page:'1'})
+ const page = searchParams.get('page'|| "1")
+ const pageNumber = Number(page)
+
   const { id } = useParams() ?? '';
   const idValue = id ?? '';
-  console.log('the id', idValue);
-  const data = useQuery(['GenrePage/:id', idValue], () => getGenre(idValue), {
-    enabled: !!idValue
+
+  const data = useQuery(['GenrePage/:id/',idValue, pageNumber], () => getGenre(idValue, pageNumber), {
+    enabled: !!idValue, keepPreviousData: true
   });
 
-  console.log('the data', data.data);
-  console.log('id', idValue);
   return (
     <>
       {data.isError && (
         <Alert variant="warning">Ooops, something went wrong!</Alert>
       )}
-      {data.isFetching ? (
+      {data.isFetching && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
-      ) : (
-        data.data?.map((movie) => (
+      )}
+      {data && (
+        <>
+        <h1>{idValue}</h1>
+
           <ListGroup className="mb-6">
             <Container>
               <Row>
-                <MoviesCard
+        {data.data?.results.map((movie) => (
+                <MovieCard
                   key={movie.id}
                   poster_path={movie.poster_path!}
                   title={movie.title!}
@@ -37,41 +46,26 @@ const MovieByGenre = () => {
                   vote_average={movie.vote_average!}
                   id={movie.id!}
                 />
-              </Row>
+        ))}
+             </Row>
             </Container>
           </ListGroup>
-        ))
+          </>
       )}
+        {data.data && ( 
+          <Pagination
+            totalPages={data.data.total_pages}
+            hasPreviousPage={pageNumber > 1}
+            hasNextPage={pageNumber  < data.data.total_pages}
+            onPreviousPage={() => {setSearchParams({ idValue: idValue || '', page: String(pageNumber - 1)}) }}
+            onNextPage={() => {setSearchParams({idValue: idValue|| '', page: String(pageNumber + 1 ) }) }}
+          /> 
+					
+        )}
+
     </>
   );
 };
 
 export default MovieByGenre;
 
-/* 
-        SearchPage 
-	//* Keeping track of search query and page
-	const query = searchParams.get("query") ?? "";
-	const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
-
-	//* Data
-	const { data, isLoading, isError, error, isSuccess } = useSearch(page, query);
-
-	//* Click event to set params
-	const handleSearch = async (query: string) => {
-		setSearchParams({ page: "1", query });
-	};
-
-    HOOKS 
-    import { IGenres } from './../interfaces/IGenres';
-    import { useQuery } from '@tanstack/react-query';
-    import TMDB from '../services/TMDBAPI';
-
-    const useGenresList = () => {
-      return useQuery<IGenres[]>(['genres-list'], TMDB.getGenresList);
-    };
-
-    export default useGenresList;
-
- 
-   */

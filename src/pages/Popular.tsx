@@ -1,14 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { getPopular } from '../services/TMDB';
-import { Alert, Container, ListGroup, Row } from 'react-bootstrap';
+import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 
 const PopularPage = () => {
-  const { data, isError } = useQuery(['PopularPage'], () => getPopular());
+  const { data, isError, isFetching} = useQuery(['PopularPage'], () => getPopular());
   return (
     <>
       <h1>TOP 20 POPULAR MOVIES</h1>
       {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
+
+       {isFetching && (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
 
       {data && (
         <ListGroup className="mb-6">

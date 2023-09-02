@@ -1,4 +1,4 @@
-import Navigation from './components/Navigtion';
+import Navigation from './components/Navigation';
 import './assets/styles.scss';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +9,7 @@ import InTheatre from './pages/PlayingNow';
 import TheMovie from './pages/MovieId';
 import GenrePage from './pages/Genre';
 import MovieByGenre from './pages/MovieByGenre';
+import { ActorID } from './pages/Actor';
 
 
 function App() {
@@ -16,7 +17,6 @@ function App() {
     <>
       <Navigation />
       <Container>
-        <switch>
           <Routes>
             <Route path="/PopularPage" element={<PopularPage />}></Route>
             <Route path="/TopRatedPage" element={<TopRated />}></Route> 
@@ -27,11 +27,14 @@ function App() {
               path="/GenrePage/:id"
               element={<MovieByGenre />}
             ></Route>
+            <Route
+              path="/ActorPage/:id"
+              element={<ActorID />}
+            ></Route>
 
             <Route></Route>
             <Route></Route>
           </Routes>
-        </switch>
       </Container>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </>

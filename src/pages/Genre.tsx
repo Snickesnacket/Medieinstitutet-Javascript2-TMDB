@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGenres } from '../services/TMDB';
 import { Alert, Spinner } from 'react-bootstrap';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { IGenres } from '../types/Genres.types';
-import { useState } from 'react';
+
 
 const GenrePage = () => {
   const genres = useQuery(['GenrePage'], () => getGenres());
@@ -24,7 +24,7 @@ const GenrePage = () => {
             key={genre.id}
             className="btn btn-outline-light btn-lg m-2"
             role="button"
-            to={`/GenrePage/${genre.id}`}
+            to={`/GenrePage/${genre.name}`}
             style={{ backgroundColor: 'darkgrey' }}
           >
             {genre.name}
