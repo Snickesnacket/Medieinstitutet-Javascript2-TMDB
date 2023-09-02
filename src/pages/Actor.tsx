@@ -4,6 +4,7 @@ import { getActor } from "../services/TMDB";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
+
 type IdParam = {
   id: string;
 };
@@ -28,7 +29,9 @@ export const ActorID = () => {
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
             )}
+            
             {isSuccess && data && (
+        
                 <>
                     <h1>{data.name}</h1>
                     <ListGroup className="mb-6">
@@ -47,11 +50,16 @@ export const ActorID = () => {
                     <h2>Also featured in: </h2>
                     <Row xs={1} md={2} className="g-4">
                     {data.credits?.cast?.map((credit) => (
+
                     <Col key={credit.id}>
                     <Card as={Link} key={credit.id} to={`/Movie/${credit.id}`}>
                     <Card.Img
                     variant="top"
-                    src={`https://image.tmdb.org/t/p/w200/${credit.poster_path}`}
+                     src={credit.poster_path
+    ? `https://image.tmdb.org/t/p/w200/${credit.poster_path}`
+    : 'https://cinemaone.net/images/movie_placeholder.png'
+  }
+
                   />
                   <Card.Body>
                     <Card.Title>{credit.title}</Card.Title>
