@@ -1,7 +1,7 @@
-import { Alert, Container, Row, Spinner } from "react-bootstrap";
+import { Alert, Card, Col, Container, ListGroup, Row, Spinner } from "react-bootstrap";
 import { ActorCard } from "../components/ActorCard";
 import { getActor } from "../services/TMDB";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 type IdParam = {
@@ -31,6 +31,7 @@ export const ActorID = () => {
             {isSuccess && data && (
                 <>
                     <h1>{data.name}</h1>
+                    <ListGroup className="mb-6">
                     <Container>
                         <Row>
                             <ActorCard
@@ -43,6 +44,24 @@ export const ActorID = () => {
                             />
                         </Row>
                     </Container>
+                    <h2>Also featured in: </h2>
+                    <Row xs={1} md={2} className="g-4">
+                    {data.credits?.cast?.map((credit) => (
+                    <Col key={credit.id}>
+                    <Card as={Link} key={credit.id} to={`/Movie/${credit.id}`}>
+                    <Card.Img
+                    variant="top"
+                    src={`https://image.tmdb.org/t/p/w200/${credit.poster_path}`}
+                  />
+                  <Card.Body>
+                    <Card.Title>{credit.title}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+             </Row>
+;
+        </ListGroup>
                 </>
             )}
         </>
