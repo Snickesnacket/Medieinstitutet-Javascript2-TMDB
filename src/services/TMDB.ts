@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { IDataResult} from '../types/DataResult.types';
-import { IMovie } from '../types/Movie.types';
+import { IDataResult } from '../types/DataResult.types';
 import { IActorResponse } from '../types/Actor';
 import { IGenresResponse } from '../types/Genres.types';
-
+import { IMovies } from '../types/Movies.types';
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const adultCont: string = '&include_adult=false';
@@ -17,7 +16,6 @@ const instance = axios.create({
     Accept: 'application/json'
   }
 });
-
 
 const get = async <T>(endpoint: string) => {
   try {
@@ -46,7 +44,7 @@ export const getNow = () => {
 };
 
 export const getMovieId = (id: string) => {
-  return get<IMovie>(
+  return get<IMovies>(
     `movie/${id}?api_key=${API_KEY}${adultCont}${creditsAndSimilar}&language=en-US`
   );
 };
