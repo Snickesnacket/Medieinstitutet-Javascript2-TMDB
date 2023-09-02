@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPopular } from '../services/TMDB';
+import { getNow } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 
-const PopularPage = () => {
-  const { data, isError, isFetching} = useQuery(['PopularPage'], () => getPopular());
+const PlayingNow = () => {
+  const { data, isError, isFetching } = useQuery(['InTheatersNowPage'], () =>
+    getNow()
+  );
   return (
     <>
-      <h1>TOP 20 POPULAR MOVIES</h1>
+      <h1>IN THEATRES NOW</h1>
       {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
 
-       {isFetching && (
+      {isFetching && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
@@ -22,13 +24,13 @@ const PopularPage = () => {
             <Row>
               {data?.results.map((movie) => (
                 <MovieCard
-                  key={movie.id}
-                  poster_path={movie.poster_path!}
-                  title={movie.title!}
-                  overview={movie.overview!}
-                  release_date={movie.release_date!}
-                  vote_average={movie.vote_average!}
-                  id={movie.id!}
+                  key={movie?.id}
+                  poster_path={movie?.poster_path}
+                  title={movie?.title}
+                  overview={movie?.overview}
+                  release_date={movie?.release_date}
+                  vote_average={movie?.vote_average}
+                  id={movie?.id}
                 />
               ))}
             </Row>
@@ -39,4 +41,4 @@ const PopularPage = () => {
   );
 };
 
-export default PopularPage;
+export default PlayingNow;

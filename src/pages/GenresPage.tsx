@@ -4,9 +4,7 @@ import { Alert, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IGenres } from '../types/Genres.types';
 
-
-const GenrePage = () => {
-  
+const Genres = () => {
   const genres = useQuery(['GenrePage'], () => getGenres());
 
   return (
@@ -21,14 +19,14 @@ const GenrePage = () => {
         </Spinner>
       ) : (
         genres.data?.map((genre: IGenres) => (
-         <Link
+          <Link
             key={genre.id}
             className="btn btn-outline-light btn-lg m-2"
             role="button"
-             to={{
-        pathname: `/GenrePage/${genre.id}`,
-        search: `page=1`,
-      }}
+            to={{
+              pathname: `/GenrePage/${genre.id}`,
+              search: `page=1`
+            }}
             style={{ backgroundColor: 'darkgrey' }}
           >
             {genre.name}
@@ -39,4 +37,4 @@ const GenrePage = () => {
   );
 };
 
-export default GenrePage;
+export default Genres;

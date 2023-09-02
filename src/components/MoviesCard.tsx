@@ -3,12 +3,12 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 interface IMovieCardProp {
-  poster_path: string;
-  title: string;
-  overview: string;
-  release_date: string;
-  vote_average: number;
-  id: number;
+  poster_path?: string | null;
+  title?: string;
+  overview?: string | null;
+  release_date?: string;
+  vote_average?: number;
+  id?: number;
 }
 
 const MovieCard: React.FC<IMovieCardProp> = ({
@@ -24,10 +24,11 @@ const MovieCard: React.FC<IMovieCardProp> = ({
       <Card.Link as={Link} to={`/movie/${id}`}>
         <Card.Img
           variant="top"
-          src={poster_path
-    ? `https://image.tmdb.org/t/p/w200/${poster_path}`
-    : 'https://cinemaone.net/images/movie_placeholder.png'
-  }
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w200/${poster_path}`
+              : 'https://cinemaone.net/images/movie_placeholder.png'
+          }
         />
       </Card.Link>
       <Card.Body>
@@ -38,7 +39,6 @@ const MovieCard: React.FC<IMovieCardProp> = ({
         <ListGroup.Item>Release Date: {release_date}</ListGroup.Item>
         <ListGroup.Item>Rating: {vote_average}</ListGroup.Item>
       </ListGroup>
-      <Card.Body></Card.Body>
     </Card>
   );
 };

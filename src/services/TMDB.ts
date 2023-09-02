@@ -18,17 +18,12 @@ const instance = axios.create({
   }
 });
 
-/**
- * Execute a HTTP GET request to an endpoint.
- * @param {string} endpoint Endpoint to HTTP GET
- * @returns Promise
- */
-const get = async <T>(endpoint: string): Promise<T> => {
+
+const get = async <T>(endpoint: string) => {
   try {
     const response = await instance.get<T>(endpoint);
-    return response.data as T;
+    return response.data;
   } catch (error) {
-    console.error('Error fetching data:', error);
     throw error;
   }
 };
