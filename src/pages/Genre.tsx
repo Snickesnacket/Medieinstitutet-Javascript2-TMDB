@@ -24,7 +24,7 @@ const GenrePage = () => {
             key={genre.id}
             className="btn btn-outline-light btn-lg m-2"
             role="button"
-            to={`/GenrePage/${genre.name}`}
+            to={`/GenrePage/${genre.id}`} 
             style={{ backgroundColor: 'darkgrey' }}
           >
             {genre.name}

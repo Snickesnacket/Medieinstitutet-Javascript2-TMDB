@@ -1,64 +1,69 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getGenre } from '../services/TMDB';
-import { Alert, Container, ListGroup,  Row, Spinner } from 'react-bootstrap';
+import { getGenre, getGenreId, getGenres } from '../services/TMDB';
+import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import { MovieCard } from '../components/MovieCard';
-import  Pagination  from '../components/Pageing'
-import { useState } from 'react';
+import Pagination from '../components/Pageing';
+
+type IdParam = {
+  id: string;
+};
 
 const MovieByGenre = () => {
-//const [page, setPage] = useState(1)
- const [searchParams, setSearchParams] = useSearchParams({idValue: '', page:'1'})
- const page = searchParams.get('page'|| "1")
- const pageNumber = Number(page)
-
-  const { id } = useParams() ?? '';
+const [searchParams, setSearchParams] = useSearchParams({page:'1'})
+  const page = searchParams.get('page'|| "1")
+  const { id } = useParams<IdParam>() ?? '';
   const idValue = id ?? '';
+  const pageNumber = Number(page)
 
-  const data = useQuery(['GenrePage/:id/',idValue, pageNumber], () => getGenre(idValue, pageNumber), {
-    enabled: !!idValue, keepPreviousData: true
+  const genreQuery = useQuery(['Genre', idValue], () => getGenreId(idValue));
+  const genres = genreQuery.data || [];
+
+  const data = useQuery(['GenrePage', idValue, pageNumber | 1], () => getGenre(idValue, pageNumber), {
+    enabled: !!idValue,
+    keepPreviousData: true,
   });
+
+  const selectedGenre = genres.find((genre) => genre.id === Number(idValue));
 
   return (
     <>
-      {data.isError && (
-        <Alert variant="warning">Ooops, something went wrong!</Alert>
-      )}
+      {data.isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
       {data.isFetching && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       )}
-      {data && (
+      {selectedGenre && (
         <>
-        <h1>{idValue}</h1>
+          <h1>{selectedGenre.name}</h1>
 
           <ListGroup className="mb-6">
             <Container>
               <Row>
-        {data.data?.results.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  poster_path={movie.poster_path!}
-                  title={movie.title!}
-                  overview={movie.overview!}
-                  release_date={movie.release_date!}
-                  vote_average={movie.vote_average!}
-                  id={movie.id!}
-                />
-        ))}
-             </Row>
+                {data.data?.results.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    poster_path={movie.poster_path!}
+                    title={movie.title!}
+                    overview={movie.overview!}
+                    release_date={movie.release_date!}
+                    vote_average={movie.vote_average!}
+                    id={movie.id!}
+                  />
+                ))}
+              </Row>
             </Container>
           </ListGroup>
-          </>
+        </>
       )}
-        {data.data && ( 
+         {data.data && ( 
           <Pagination
             totalPages={data.data.total_pages}
             hasPreviousPage={pageNumber > 1}
             hasNextPage={pageNumber  < data.data.total_pages}
-            onPreviousPage={() => {setSearchParams({ idValue: idValue || '', page: String(pageNumber - 1)}) }}
-            onNextPage={() => {setSearchParams({idValue: idValue|| '', page: String(pageNumber + 1 ) }) }}
+            onPreviousPage={() => {setSearchParams({ page: String(pageNumber - 1)}) }}
+            onNextPage={() => {setSearchParams({ page: String(pageNumber + 1 ) }) }}
           /> 
 					
         )}
@@ -68,4 +73,3 @@ const MovieByGenre = () => {
 };
 
 export default MovieByGenre;
-
