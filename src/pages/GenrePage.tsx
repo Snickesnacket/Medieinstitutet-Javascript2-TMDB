@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getGenre, getGenreId } from '../services/TMDB';
+import { getGenre, getGenres } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 import Pagination from '../components/Pageing';
@@ -16,7 +16,7 @@ const Genre = () => {
   const idValue = id ?? '';
   const pageNumber = Number(page);
 
-  const genreQuery = useQuery(['Genre', idValue], () => getGenreId());
+  const genreQuery = useQuery(['Genre', idValue], () => getGenres());
   const genres = genreQuery.data || [];
 
   const data = useQuery(
@@ -40,22 +40,22 @@ const Genre = () => {
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       )}
-      {selectedGenre && data.isSuccess && (
+      {selectedGenre && data.isSuccess && data.data && (
         <>
           <h1>{selectedGenre.name}</h1>
 
           <ListGroup className="mb-6">
             <Container>
               <Row>
-                {data.data?.results.map((movie) => (
+                {data.data.results.map((movie) => (
                   <MovieCard
                     key={movie.id}
-                    poster_path={movie.poster_path!}
-                    title={movie.title!}
-                    overview={movie.overview!}
-                    release_date={movie.release_date!}
-                    vote_average={movie.vote_average!}
-                    id={movie.id!}
+                    poster_path={movie?.poster_path}
+                    title={movie?.title}
+                    overview={movie?.overview}
+                    release_date={movie?.release_date}
+                    vote_average={movie?.vote_average}
+                    id={movie?.id}
                   />
                 ))}
               </Row>

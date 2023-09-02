@@ -1,11 +1,11 @@
+import { IActorResponse } from './Actor';
 import { IGenres } from './Genres.types';
-import { IPerson } from './Person.types';
 
 export interface IMovies {
   adult?: boolean;
   budget?: number;
   credits?: {
-    cast?: IPerson[];
+    cast?: IActorResponse[];
   };
   genres?: IGenres[];
   genres_ids?: IGenres[];

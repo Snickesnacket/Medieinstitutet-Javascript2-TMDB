@@ -3,6 +3,7 @@ import { getMovieId } from '../services/TMDB';
 import { Alert, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 import { Link, useParams } from 'react-router-dom';
+import { IActorResponse } from '../types/Actor';
 
 type IdParam = {
   id: string;
@@ -42,7 +43,7 @@ const Movie = () => {
             </Container>
             <h2>The Cast</h2>
             <Row xs={1} md={2} className="g-4">
-              {data.credits?.cast?.map((person) => (
+              {data.credits?.cast?.map((person: IActorResponse) => (
                 <Col key={person.id}>
                   <Card
                     as={Link}
@@ -64,7 +65,6 @@ const Movie = () => {
                 </Col>
               ))}
             </Row>
-            ;
           </ListGroup>
         </>
       )}
