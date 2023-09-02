@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getGenre, getGenreId, getGenres } from '../services/TMDB';
+import { getGenre, getGenreId} from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import { MovieCard } from '../components/MovieCard';
 import Pagination from '../components/Pageing';
@@ -16,7 +16,7 @@ const [searchParams, setSearchParams] = useSearchParams({page:'1'})
   const idValue = id ?? '';
   const pageNumber = Number(page)
 
-  const genreQuery = useQuery(['Genre', idValue], () => getGenreId(idValue));
+  const genreQuery = useQuery(['Genre', idValue], () => getGenreId());
   const genres = genreQuery.data || [];
 
   const data = useQuery(['GenrePage', idValue, pageNumber | 1], () => getGenre(idValue, pageNumber), {

@@ -1,18 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGenres } from '../services/TMDB';
-import { Alert, Button, Spinner } from 'react-bootstrap';
-import { Link, createSearchParams, useNavigate, } from 'react-router-dom';
+import { Alert, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { IGenres } from '../types/Genres.types';
 
 
 const GenrePage = () => {
-   const navigate = useNavigate();
-   const params = {  page: ' 1' };
-  const goToGenre = () =>
-    navigate({
-      pathname: '/GenrePage/:id',
-      search: `?${createSearchParams(params)}`,
-    });
   
   const genres = useQuery(['GenrePage'], () => getGenres());
 
@@ -34,7 +27,7 @@ const GenrePage = () => {
             role="button"
              to={{
         pathname: `/GenrePage/${genre.id}`,
-        search: `=${genre.name}?page=1`,
+        search: `page=1`,
       }}
             style={{ backgroundColor: 'darkgrey' }}
           >
