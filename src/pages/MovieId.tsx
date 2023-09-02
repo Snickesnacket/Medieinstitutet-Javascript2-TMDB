@@ -47,7 +47,10 @@ const TheMovie = () => {
                 <Card as={Link} key={person.id} to={`/ActorPage/${person.id}`}>
                   <Card.Img
                     variant="top"
-                    src={`https://image.tmdb.org/t/p/w200/${person.profile_path}`}
+                    src={person.profile_path
+    ? `https://image.tmdb.org/t/p/w200/${person.profile_path}`
+    : 'https://cinemaone.net/images/movie_placeholder.png'
+  }
                   />
                   <Card.Body>
                     <Card.Title>{person.name}</Card.Title>

@@ -24,7 +24,10 @@ const MovieCard: React.FC<IMovieCardProp> = ({
       <Card.Link as={Link} to={`/movie/${id}`}>
         <Card.Img
           variant="top"
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          src={poster_path
+    ? `https://image.tmdb.org/t/p/w200/${poster_path}`
+    : 'https://cinemaone.net/images/movie_placeholder.png'
+  }
         />
       </Card.Link>
       <Card.Body>

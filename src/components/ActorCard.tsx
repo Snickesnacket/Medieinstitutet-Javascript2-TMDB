@@ -25,7 +25,10 @@ export const ActorCard: React.FC<IActorCardProp> = ({
         <Card.Link as={Link} to={`/actor/${id}`}>
         <Card.Img
           variant="top"
-          src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
+          src={profile_path
+    ? `https://image.tmdb.org/t/p/w200/${profile_path}`
+    : 'https://cinemaone.net/images/movie_placeholder.png'
+  }
         />
       </Card.Link>
       <Card.Body>
