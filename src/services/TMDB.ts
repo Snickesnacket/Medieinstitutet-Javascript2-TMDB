@@ -76,3 +76,10 @@ export const getActor = async (id: string) => {
   );
 
 };
+
+export const getGenreId = async (id: string) => {
+  const data = await get<IGenresResponse>(
+    `genre/movie/list?api_key=${API_KEY}${adultCont}&language=en-USpage=1`
+  );
+  return data.genres
+};
