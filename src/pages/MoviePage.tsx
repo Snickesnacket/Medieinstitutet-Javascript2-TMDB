@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { getMovieId } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 import { RowMovieCard } from '../components/RowMovieCard';
 import { useParams } from 'react-router-dom';
+import { useMovieId } from '../hooks/useMovieIdHook';
 
 type IdParam = {
   id: string;
@@ -13,13 +12,7 @@ const Movie = () => {
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
 
-  const { data, isError, isLoading, isSuccess } = useQuery(
-    ['movie', idValue],
-    () => getMovieId(idValue),
-    {
-      enabled: !!idValue
-    }
-  );
+  const { data, isError, isLoading, isSuccess } = useMovieId(idValue);
 
   return (
     <>
@@ -68,6 +61,3 @@ const Movie = () => {
 };
 
 export default Movie;
-
-
-

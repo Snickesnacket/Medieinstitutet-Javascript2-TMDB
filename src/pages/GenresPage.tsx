@@ -1,11 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { newGenre } from '../services/TMDB';
 import { DataLink } from '../components/DataGenreLink';
+import { useNewGenre } from '../hooks/useNewGenre';
 
 const Genres = () => {
-  const { data, isLoading, isError, isSuccess } = useQuery(['GenrePage'], () =>
-    newGenre()
-  );
+  const { data, isLoading, isError, isSuccess } = useNewGenre();
 
   return (
     <>
