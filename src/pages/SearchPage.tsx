@@ -60,24 +60,28 @@ export const Search = () => {
         </div>
       </Form>
 
+      <p>Showing search results for "{query}"...</p>
       <DataHandeling
         isError={isError}
         isLoading={isFetching}
         data={data?.results}
         isSuccess={isSuccess}
       />
-      {data && (
-        <Pagination
-          totalPages={data.total_pages}
-          hasPreviousPage={pageNumber > 1}
-          hasNextPage={pageNumber < data.total_pages}
-          onPreviousPage={() => {
-            setSearchParams({ query: query, page: String(pageNumber - 1) });
-          }}
-          onNextPage={() => {
-            setSearchParams({ query: query, page: String(pageNumber + 1) });
-          }}
-        />
+
+      {data && query && (
+        <>
+          <Pagination
+            totalPages={data.total_pages}
+            hasPreviousPage={pageNumber > 1}
+            hasNextPage={pageNumber < data.total_pages}
+            onPreviousPage={() => {
+              setSearchParams({ query: query, page: String(pageNumber - 1) });
+            }}
+            onNextPage={() => {
+              setSearchParams({ query: query, page: String(pageNumber + 1) });
+            }}
+          />
+        </>
       )}
     </>
   );
