@@ -1,4 +1,4 @@
-import { IActorResponse } from './Actor';
+import { IActorResponse } from './Actor.types';
 import { IGenres } from './Genres.types';
 
 export interface IMovies {

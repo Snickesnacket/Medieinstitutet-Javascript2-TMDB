@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { IDataResult } from '../types/DataResult.types';
-import { IActorResponse } from '../types/Actor';
+import { IActorResponse } from '../types/Actor.types';
 import { IGenresResponse } from '../types/Genres.types';
 import { IMovies } from '../types/Movies.types';
 

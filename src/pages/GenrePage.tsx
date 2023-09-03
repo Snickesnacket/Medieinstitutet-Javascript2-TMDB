@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getGenre, getGenres } from '../services/TMDB';
+import { getGenres } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 import Pagination from '../components/Pageing';
+import useGenre from '../hooks/useGenreHook';
 
 type IdParam = {
   id: string;
@@ -19,35 +20,26 @@ const Genre = () => {
   const genreQuery = useQuery(['Genre', idValue], () => getGenres());
   const genres = genreQuery.data || [];
 
-  const data = useQuery(
-    ['GenrePage', idValue, pageNumber | 1],
-    () => getGenre(idValue, pageNumber),
-    {
-      enabled: !!idValue,
-      keepPreviousData: true
-    }
-  );
+  const { data, isError, isLoading, isSuccess } = useGenre(idValue, pageNumber);
 
   const selectedGenre = genres.find((genre) => genre.id === Number(idValue));
 
   return (
     <>
-      {data.isError && (
-        <Alert variant="warning">Ooops, something went wrong!</Alert>
-      )}
-      {data.isFetching && (
+      {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
+      {isLoading && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       )}
-      {selectedGenre && data.isSuccess && data.data && (
+      {selectedGenre && isSuccess && data.results && (
         <>
           <h1>{selectedGenre.name}</h1>
 
           <ListGroup className="mb-6">
             <Container>
               <Row>
-                {data.data.results.map((movie) => (
+                {data.results.map((movie) => (
                   <MovieCard
                     key={movie.id}
                     poster_path={movie?.poster_path}
@@ -61,20 +53,19 @@ const Genre = () => {
               </Row>
             </Container>
           </ListGroup>
+
+          <Pagination
+            totalPages={data.total_pages}
+            hasPreviousPage={pageNumber > 1}
+            hasNextPage={pageNumber < data.total_pages}
+            onPreviousPage={() => {
+              setSearchParams({ page: String(pageNumber - 1) });
+            }}
+            onNextPage={() => {
+              setSearchParams({ page: String(pageNumber + 1) });
+            }}
+          />
         </>
-      )}
-      {data.data && (
-        <Pagination
-          totalPages={data.data.total_pages}
-          hasPreviousPage={pageNumber > 1}
-          hasNextPage={pageNumber < data.data.total_pages}
-          onPreviousPage={() => {
-            setSearchParams({ page: String(pageNumber - 1) });
-          }}
-          onNextPage={() => {
-            setSearchParams({ page: String(pageNumber + 1) });
-          }}
-        />
       )}
     </>
   );

@@ -3,7 +3,7 @@ import { getMovieId } from '../services/TMDB';
 import { Alert, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
 import { Link, useParams } from 'react-router-dom';
-import { IActorResponse } from '../types/Actor';
+import { IActorResponse } from '../types/Actor.types';
 
 type IdParam = {
   id: string;

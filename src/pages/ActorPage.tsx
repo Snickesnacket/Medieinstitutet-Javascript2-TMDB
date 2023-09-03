@@ -13,7 +13,7 @@ export const Actor = () => {
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
 
-  const { data, isError, isFetching, isSuccess } = useQuery(
+  const { data, isError, isLoading, isSuccess } = useQuery(
     ['ActorPage/: id', idValue],
     () => getActor(idValue),
     {
@@ -24,7 +24,7 @@ export const Actor = () => {
   return (
     <>
       {isError && <Alert variant="warning">Oops, something went wrong!</Alert>}
-      {isFetching && (
+      {isLoading && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
@@ -61,6 +61,9 @@ export const Actor = () => {
                     />
                     <Card.Body>
                       <Card.Title>{credit.title}</Card.Title>
+                      <ListGroup className="list-group-flush">
+                        Character: {credit.character}
+                      </ListGroup>
                     </Card.Body>
                   </Card>
                 </Col>
