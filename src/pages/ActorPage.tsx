@@ -1,9 +1,8 @@
-import { Alert, Card, Col, Container, ListGroup, Row, Spinner } from "react-bootstrap";
+import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import { ActorCard } from '../components/ActorCard';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { useActor } from '../hooks/useActorHook';
-
-
+import { RowCard } from '../components/RowCard';
 type IdParam = {
   id: string;
 };
@@ -39,30 +38,19 @@ export const Actor = () => {
                 />
               </Row>
             </Container>
-            <h2>Also featured in: </h2>
-            <Row xs={1} md={2} className="g-4">
-              {data.credits?.cast?.map((credit) => (
-                <Col key={credit.id}>
-                  <Card as={Link} key={credit.id} to={`/Movie/${credit.id}`}>
-                    <Card.Img
-                      variant="top"
-                      src={
-                        credit.poster_path
-                          ? `https://image.tmdb.org/t/p/w200/${credit.poster_path}`
-                          : 'https://cinemaone.net/images/movie_placeholder.png'
-                      }
-                    />
-                    <Card.Body>
-                      <Card.Title>{credit.title}</Card.Title>
-                      <ListGroup className="list-group-flush">
-                        Character: {credit.character}
-                      </ListGroup>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-            ;
+            {isSuccess && data.credits.cast && (
+              <>
+                <h2>Also featured in: </h2>
+                {data.credits.cast.map((credit) => (
+                  <RowCard
+                    id={credit.id}
+                    poster_path={credit.poster_path}
+                    title={credit.title}
+                    character={credit.character}
+                  />
+                ))}
+              </>
+            )}
           </ListGroup>
         </>
       )}

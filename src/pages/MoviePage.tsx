@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMovieId } from '../services/TMDB';
-import { Alert, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
+import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import MovieCard from '../components/MoviesCard';
-import { Link, useParams } from 'react-router-dom';
-import { IActorResponse } from '../types/Actor.types';
+import { RowMovieCard } from '../components/RowMovieCard';
+import { useParams } from 'react-router-dom';
 
 type IdParam = {
   id: string;
@@ -13,7 +13,7 @@ const Movie = () => {
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
 
-  const { data, isError } = useQuery(
+  const { data, isError, isLoading, isSuccess } = useQuery(
     ['movie', idValue],
     () => getMovieId(idValue),
     {
@@ -23,8 +23,13 @@ const Movie = () => {
 
   return (
     <>
-      {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
-      {data && (
+      {isError && <Alert variant="warning">Oops, something went wrong!</Alert>}
+      {isLoading && (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+      {data && isSuccess && (
         <>
           <h1>{data.title}</h1>
           <ListGroup className="mb-6">
@@ -42,29 +47,19 @@ const Movie = () => {
               </Row>
             </Container>
             <h2>The Cast</h2>
-            <Row xs={1} md={2} className="g-4">
-              {data.credits?.cast?.map((person: IActorResponse) => (
-                <Col key={person.id}>
-                  <Card
-                    as={Link}
-                    key={person.id}
-                    to={`/ActorPage/${person.id}`}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={
-                        person.profile_path
-                          ? `https://image.tmdb.org/t/p/w200/${person.profile_path}`
-                          : 'https://cinemaone.net/images/movie_placeholder.png'
-                      }
-                    />
-                    <Card.Body>
-                      <Card.Title>{person.name}</Card.Title>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
+
+            {isSuccess && data.credits?.cast && (
+              <>
+                <h2>Also featured in: </h2>
+                {data?.credits?.cast.map((person) => (
+                  <RowMovieCard
+                    id={person.id}
+                    profile_path={person.profile_path}
+                    name={person.name}
+                  />
+                ))}
+              </>
+            )}
           </ListGroup>
         </>
       )}

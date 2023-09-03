@@ -1,5 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { getNow } from '../services/TMDB';
 import DataHandeling from '../components/DataMovieCard';
 import { usePlayingNow } from '../hooks/usePlayingNowHook';
 

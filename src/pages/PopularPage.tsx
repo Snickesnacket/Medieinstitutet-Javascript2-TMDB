@@ -5,6 +5,7 @@ const Popular = () => {
   const { data, isError, isLoading, isSuccess } = usePopular();
   return (
     <>
+      <h1>POPULAR MOVIES</h1>
       <DataHandeling
         isError={isError}
         isLoading={isLoading}
