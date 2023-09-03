@@ -6,7 +6,7 @@ import { IMovies } from '../types/Movies.types';
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const adultCont: string = '&include_adult=false';
-const creditsAndSimilar: string = '&append_to_response=credits';
+const creditsAndSimilar: string = '&append_to_response=credits,similar';
 
 const instance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',

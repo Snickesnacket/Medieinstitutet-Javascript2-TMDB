@@ -3,10 +3,10 @@ import { Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 type IProps = {
-  id: number;
-  poster_path: string;
-  title: string;
-  character: string;
+  id?: number;
+  poster_path?: string;
+  title?: string;
+  character?: string;
 };
 
 export const RowCard: React.FC<IProps> = ({

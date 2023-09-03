@@ -3,6 +3,8 @@ import MovieCard from '../components/MoviesCard';
 import { RowMovieCard } from '../components/RowMovieCard';
 import { useParams } from 'react-router-dom';
 import { useMovieId } from '../hooks/useMovieIdHook';
+import { RowCard } from '../components/RowActorCard';
+import { IActorResponse } from '../types/Actor.types';
 
 type IdParam = {
   id: string;
@@ -44,11 +46,27 @@ const Movie = () => {
             {isSuccess && data.credits?.cast && (
               <>
                 <h2>Also featured in: </h2>
-                {data?.credits?.cast.map((person) => (
+                {data?.credits?.cast.map((person: IActorResponse) => (
                   <RowMovieCard
                     id={person.id}
                     profile_path={person.profile_path}
                     name={person.name}
+                  />
+                ))}
+              </>
+            )}
+
+            <h2>Similar Movies</h2>
+            {isSuccess && data.similar?.results && (
+              <>
+                {data.similar?.results.map((movie) => (
+                  <RowCard
+                    id={movie.id ?? 1}
+                    poster_path={movie.poster_path ?? 'tjosan'}
+                    title={movie.title ?? 'tjosan'}
+                    character={
+                      movie.release_date ?? 'Release Date not available'
+                    } // Use a default value or placeholder text
                   />
                 ))}
               </>
