@@ -61,12 +61,9 @@ const Movie = () => {
               <>
                 {data.similar?.results.map((movie) => (
                   <RowCard
-                    id={movie.id ?? 1}
-                    poster_path={movie.poster_path ?? 'tjosan'}
-                    title={movie.title ?? 'tjosan'}
-                    character={
-                      movie.release_date ?? 'Release Date not available'
-                    } // Use a default value or placeholder text
+                    id={movie.id!}
+                    poster_path={movie.poster_path ?? 'Poster is missing'}
+                    title={movie.title ?? 'title is missing'}
                   />
                 ))}
               </>

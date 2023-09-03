@@ -46,7 +46,6 @@ export const Actor = () => {
                     id={credit.id}
                     poster_path={credit.poster_path}
                     title={credit.title}
-                    character={credit.character}
                   />
                 ))}
               </>
