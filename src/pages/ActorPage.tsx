@@ -2,7 +2,7 @@ import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
 import { ActorCard } from '../components/ActorCard';
 import { useParams } from 'react-router-dom';
 import { useActor } from '../hooks/useActorHook';
-import { RowCard } from '../components/RowCard';
+import { RowCard } from '../components/RowActorCard';
 type IdParam = {
   id: string;
 };
