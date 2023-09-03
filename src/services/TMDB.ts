@@ -77,3 +77,9 @@ export const getActor = async (id: string) => {
 
 };
 
+export const getSearch = async (query: string, page = 1) => {
+  return get<IDataResult>(
+    `search/movie?query=${query}&api_key=${API_KEY}&language=en-US&region=US&${adultCont}&page=${page}&append_to_response=credits`
+  );
+};
+

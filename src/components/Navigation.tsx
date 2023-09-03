@@ -22,6 +22,9 @@ const Navigation = () => {
             <Nav.Link as={NavLink} to="/GenrePage">
               Genres
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/SearchPage">
+              Search
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

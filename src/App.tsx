@@ -11,6 +11,7 @@ import Genres from './pages/GenresPage';
 import Genre from './pages/GenrePage';
 import { Actor } from './pages/ActorPage';
 import { PageNotFound } from './pages/PageNotFound';
+import { Search } from './pages/SearchPage';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       <Navigation />
       <Container>
         <Routes>
-          <Route path="/" element={<Popular />} />
+          <Route path="/" element={<Popular />}></Route>
+          <Route path="/SearchPage" element={<Search />}></Route>
           <Route path="/TopRatedPage" element={<TopRated />}></Route>
           <Route path="/InTheatersNowPage" element={<PlayingNow />}></Route>
           <Route path="/Movie/:id" element={<Movie />}></Route>
