@@ -1,42 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { getNow } from '../services/TMDB';
-import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
-import MovieCard from '../components/MoviesCard';
+import DataHandeling from '../components/DataMovieCard';
+import { usePlayingNow } from '../hooks/usePlayingNowHook';
 
 const PlayingNow = () => {
-  const { data, isError, isFetching } = useQuery(['InTheatersNowPage'], () =>
-    getNow()
-  );
+  const { data, isError, isLoading, isSuccess } = usePlayingNow();
   return (
     <>
       <h1>IN THEATRES NOW</h1>
-      {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
-
-      {isFetching && (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      )}
-
-      {data && (
-        <ListGroup className="mb-6">
-          <Container>
-            <Row>
-              {data?.results.map((movie) => (
-                <MovieCard
-                  key={movie?.id}
-                  poster_path={movie?.poster_path}
-                  title={movie?.title}
-                  overview={movie?.overview}
-                  release_date={movie?.release_date}
-                  vote_average={movie?.vote_average}
-                  id={movie?.id}
-                />
-              ))}
-            </Row>
-          </Container>
-        </ListGroup>
-      )}
+      <DataHandeling
+        isError={isError}
+        isLoading={isLoading}
+        data={data?.results}
+        isSuccess={isSuccess}
+      />
     </>
   );
 };

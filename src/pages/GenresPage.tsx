@@ -1,38 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { getGenres } from '../services/TMDB';
-import { Alert, Spinner } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { IGenres } from '../types/Genres.types';
+import { newGenre } from '../services/TMDB';
+import { DataLink } from '../components/DataGenreLink';
 
 const Genres = () => {
-  const genres = useQuery(['GenrePage'], () => getGenres());
+  const { data, isLoading, isError, isSuccess } = useQuery(['GenrePage'], () =>
+    newGenre()
+  );
 
   return (
     <>
       <h1>Genres</h1>
-      {genres.isError && (
-        <Alert variant="warning">Ooops, something went wrong!</Alert>
-      )}
-      {genres.isFetching ? (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      ) : (
-        genres.data?.map((genre: IGenres) => (
-          <Link
-            key={genre.id}
-            className="btn btn-outline-light btn-lg m-2"
-            role="button"
-            to={{
-              pathname: `/GenrePage/${genre.id}`,
-              search: `page=1`
-            }}
-            style={{ backgroundColor: 'darkgrey' }}
-          >
-            {genre.name}
-          </Link>
-        ))
-      )}
+      <DataLink
+        isError={isError}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        data={data}
+      />
     </>
   );
 };

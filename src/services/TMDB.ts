@@ -56,6 +56,13 @@ export const getGenres = async () => {
   return data.genres;
 };
 
+export const newGenre = async () => {
+  const data = await get<IGenresResponse>(
+    `genre/movie/list?api_key=${API_KEY}${adultCont}&language=en-USpage=1`
+  );
+  return data;
+};
+
 export const getGenre = async (id: string, page = 1) => {
   const data = await get<IDataResult>(
     `discover/movie?api_key=${API_KEY}&language=en-US&region=US&$${adultCont}&page=${page}&with_genres=${id}`

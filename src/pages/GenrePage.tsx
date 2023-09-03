@@ -3,7 +3,7 @@ import Pagination from '../components/Pageing';
 import useGenre from '../hooks/useGenreHook';
 import useGenres from '../hooks/useGenresHook';
 import { IGenres } from '../types/Genres.types';
-import DataHandeling from '../components/dataResult';
+import DataHandeling from '../components/DataMovieCard';
 
 type IdParam = {
   id: string;
