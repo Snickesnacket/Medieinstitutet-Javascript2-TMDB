@@ -1,8 +1,7 @@
 import { Alert, Card, Col, Container, ListGroup, Row, Spinner } from "react-bootstrap";
-import { ActorCard } from "../components/ActorCard";
-import { getActor } from "../services/TMDB";
+import { ActorCard } from '../components/ActorCard';
 import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useActor } from '../hooks/useActorHook';
 
 
 type IdParam = {
@@ -13,13 +12,7 @@ export const Actor = () => {
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
 
-  const { data, isError, isLoading, isSuccess } = useQuery(
-    ['ActorPage/: id', idValue],
-    () => getActor(idValue),
-    {
-      enabled: !!idValue
-    }
-  );
+  const { data, isError, isLoading, isSuccess } = useActor(idValue);
 
   return (
     <>

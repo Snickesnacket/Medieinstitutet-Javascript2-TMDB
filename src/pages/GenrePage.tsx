@@ -1,10 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { getGenres } from '../services/TMDB';
-import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
-import MovieCard from '../components/MoviesCard';
 import Pagination from '../components/Pageing';
 import useGenre from '../hooks/useGenreHook';
+import useGenres from '../hooks/useGenresHook';
+import { IGenres } from '../types/Genres.types';
+import DataHandeling from '../components/dataResult';
 
 type IdParam = {
   id: string;
@@ -17,55 +16,35 @@ const Genre = () => {
   const idValue = id ?? '';
   const pageNumber = Number(page);
 
-  const genreQuery = useQuery(['Genre', idValue], () => getGenres());
-  const genres = genreQuery.data || [];
-
+  const genres = useGenres();
   const { data, isError, isLoading, isSuccess } = useGenre(idValue, pageNumber);
 
-  const selectedGenre = genres.find((genre) => genre.id === Number(idValue));
+  const selectedGenre = genres.find(
+    (genre: IGenres) => genre.id === Number(idValue)
+  );
+  console.log('name', selectedGenre?.name);
 
   return (
     <>
-      {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
-      {isLoading && (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      )}
-      {selectedGenre && isSuccess && data.results && (
-        <>
-          <h1>{selectedGenre.name}</h1>
-
-          <ListGroup className="mb-6">
-            <Container>
-              <Row>
-                {data.results.map((movie) => (
-                  <MovieCard
-                    key={movie.id}
-                    poster_path={movie?.poster_path}
-                    title={movie?.title}
-                    overview={movie?.overview}
-                    release_date={movie?.release_date}
-                    vote_average={movie?.vote_average}
-                    id={movie?.id}
-                  />
-                ))}
-              </Row>
-            </Container>
-          </ListGroup>
-
-          <Pagination
-            totalPages={data.total_pages}
-            hasPreviousPage={pageNumber > 1}
-            hasNextPage={pageNumber < data.total_pages}
-            onPreviousPage={() => {
-              setSearchParams({ page: String(pageNumber - 1) });
-            }}
-            onNextPage={() => {
-              setSearchParams({ page: String(pageNumber + 1) });
-            }}
-          />
-        </>
+      {selectedGenre && <h1>{selectedGenre.name}</h1>}
+      <DataHandeling
+        isError={isError}
+        isLoading={isLoading}
+        data={data?.results}
+        isSuccess={isSuccess}
+      />
+      {data && (
+        <Pagination
+          totalPages={data.total_pages}
+          hasPreviousPage={pageNumber > 1}
+          hasNextPage={pageNumber < data.total_pages}
+          onPreviousPage={() => {
+            setSearchParams({ page: String(pageNumber - 1) });
+          }}
+          onNextPage={() => {
+            setSearchParams({ page: String(pageNumber + 1) });
+          }}
+        />
       )}
     </>
   );

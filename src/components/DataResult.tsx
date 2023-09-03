@@ -1,30 +1,41 @@
-import { useQuery } from '@tanstack/react-query';
-import { getPopular } from '../services/TMDB';
 import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
-import MovieCard from '../components/MoviesCard';
+import { IMovies } from '../types/Movies.types';
+import MovieCard from './MoviesCard';
 
-const Popular = () => {
-  const { data, isError, isFetching } = useQuery(['Homepage'], () =>
-    getPopular()
-  );
+type IProps = {
+  isError: boolean;
+  isLoading: boolean;
+  data: IMovies[] | undefined;
+  isSuccess: boolean;
+};
+
+const DataHandeling: React.FC<IProps> = ({
+  isError,
+  isLoading,
+  data,
+  isSuccess
+}) => {
   return (
     <>
-      <h1> POPULAR MOVIES</h1>
       {isError && <Alert variant="warning">Ooops, something went wrong!</Alert>}
 
-      {isFetching && (
+      {isLoading && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       )}
 
-      {data && (
+      {data && data.length === 0 && (
+        <Alert variant="info">No data available</Alert>
+      )}
+
+      {data && isSuccess && (
         <ListGroup className="mb-6">
           <Container>
             <Row>
-              {data?.results.map((movie) => (
+              {data?.map((movie) => (
                 <MovieCard
-                  key={movie?.id}
+                  key={movie.id}
                   poster_path={movie?.poster_path}
                   title={movie?.title}
                   overview={movie?.overview}
@@ -41,4 +52,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default DataHandeling;
