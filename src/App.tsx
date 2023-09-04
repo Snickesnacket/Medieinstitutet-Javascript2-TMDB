@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Navigation from './components/Navigation';
+import './assets/styles.scss';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Container from 'react-bootstrap/Container';
+import { Routes, Route } from 'react-router-dom';
+import Popular from './pages/PopularPage';
+import TopRated from './pages/TopRatedPage';
+import PlayingNow from './pages/PlayingNowPage';
+import Movie from './pages/MoviePage';
+import Genres from './pages/GenresPage';
+import Genre from './pages/GenrePage';
+import { Actor } from './pages/ActorPage';
+import { PageNotFound } from './pages/PageNotFound';
+import { Search } from './pages/SearchPage';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navigation />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Popular />}></Route>
+          <Route path="/SearchPage" element={<Search />}></Route>
+          <Route path="/TopRatedPage" element={<TopRated />}></Route>
+          <Route path="/InTheatersNowPage" element={<PlayingNow />}></Route>
+          <Route path="/Movie/:id" element={<Movie />}></Route>
+          <Route path="/GenrePage" element={<Genres />}></Route>
+          <Route path="/GenrePage/:id" element={<Genre />}></Route>
+          <Route path="/ActorPage/:id" element={<Actor />}></Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Container>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
