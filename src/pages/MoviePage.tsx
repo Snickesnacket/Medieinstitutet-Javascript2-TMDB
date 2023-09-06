@@ -5,21 +5,24 @@ import { useParams } from 'react-router-dom';
 import { useMovieId } from '../hooks/useMovieIdHook';
 import { RowCard } from '../components/RowActorCard';
 import { IActorResponse } from '../types/Actor.types';
-import useViewed from '../hooks/useViewedHook';
-import { StoreDataType } from '../contexts/localstorageContext';
+
+import { LSContext, StoreDataType } from '../contexts/localstorageContext';
+import { useContext, useEffect } from 'react';
 
 type IdParam = {
   id: string;
 };
 
 const Movie = () => {
-  const { viewed }: StoreDataType = useViewed();
-  console.log(viewed);
+  const { storedValue } = useContext(LSContext);
+
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
 
   const { data, isError, isLoading, isSuccess } = useMovieId(idValue);
-
+  useEffect(() => {
+    storedValue(data?.title, data?.id, data?.poster_path);
+  }, [data]);
   return (
     <>
       {isError && <Alert variant="warning">Oops, something went wrong!</Alert>}
@@ -59,17 +62,6 @@ const Movie = () => {
                   />
                 ))}
               </>
-            )}
-            {viewed.length > 0 && (
-              <div className="grid grid-cols-1 items-center justify-center px-4 md:px-8">
-                {viewed.map((item: any) => (
-                  <RowCard
-                    id={item.id!}
-                    poster_path={item.poster_path ?? 'Poster is missing'}
-                    title={item.title ?? 'title is missing'}
-                  />
-                ))}
-              </div>
             )}
 
             <h2>Similar Movies</h2>
