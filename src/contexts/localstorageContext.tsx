@@ -14,7 +14,7 @@ export const LSContext = createContext<StoreDataType[] | any>(null);
 export const LocalStorageContext = ({ children }: IProps) => {
   const [viewed, setViewed] = useState<IMovies[]>(() => {
     //set the value using the key 'visited-movies'
-    const storedData = window.localStorage.getItem('visited-movies');
+    const storedData = window.localStorage.getItem('key');
 
     return storedData ? JSON.parse(storedData) : [];
   });
@@ -26,10 +26,10 @@ export const LocalStorageContext = ({ children }: IProps) => {
 
   useEffect(() => {
     if (viewed.length <= 10) {
-      window.localStorage.setItem('visited-movies', JSON.stringify(viewed));
+      window.localStorage.setItem('key', JSON.stringify(viewed));
     } else {
       viewed.shift();
-      window.localStorage.setItem('visited-movies', JSON.stringify(viewed));
+      window.localStorage.setItem('key', JSON.stringify(viewed));
     }
   }, [viewed]);
 
