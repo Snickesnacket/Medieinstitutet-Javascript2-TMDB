@@ -43,6 +43,7 @@ export const Actor = () => {
                 <h2>Also featured in: </h2>
                 {data.credits.cast.map((credit) => (
                   <RowCard
+                    key={credit.id}
                     id={credit.id}
                     poster_path={credit.poster_path}
                     title={credit.title}
