@@ -25,7 +25,13 @@ const Navigation = () => {
             <Nav.Link as={NavLink} to="/GenrePage">
               Genres
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/SearchPage">
+            <Nav.Link as={NavLink} to="/TopDayPage">
+              Trending today
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/TopWeekPage">
+              Trending this week
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/SearchPage"> 
               Search
             </Nav.Link>
           </Nav>

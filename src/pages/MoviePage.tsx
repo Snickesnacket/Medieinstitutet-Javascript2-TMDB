@@ -91,6 +91,18 @@ return (
               ))}
             </>
           )}
+          <h2>Recently viewed</h2>
+          {isSuccess && viewed && (
+            <>
+              {viewed.map((movie) => (
+                <RowCard
+                  id={movie.id!}
+                  poster_path={movie.poster_path ?? 'Poster is missing'}
+                  title={movie.title ?? 'title is missing'}
+                />
+              ))}
+            </>
+          )}
         </ListGroup>
       </>
     )}

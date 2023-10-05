@@ -22,7 +22,6 @@ const Genre = () => {
   const selectedGenre = genres.find(
     (genre: IGenres) => genre.id === Number(idValue)
   );
-  console.log('name', selectedGenre?.name);
 
   return (
     <>
