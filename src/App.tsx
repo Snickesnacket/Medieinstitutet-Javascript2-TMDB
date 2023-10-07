@@ -12,6 +12,8 @@ import Genre from './pages/GenrePage';
 import { Actor } from './pages/ActorPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { Search } from './pages/SearchPage';
+import PopularWeek from './pages/TopWeekPage';
+import PopularDay from './pages/TopDayPage';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Popular />}></Route>
           <Route path="/SearchPage" element={<Search />}></Route>
+          <Route path="/TopWeekPage" element={<PopularWeek />}></Route>
+          <Route path="/TopDayPage" element={<PopularDay />}></Route>
           <Route path="/TopRatedPage" element={<TopRated />}></Route>
           <Route path="/InTheatersNowPage" element={<PlayingNow />}></Route>
           <Route path="/Movie/:id" element={<Movie />}></Route>

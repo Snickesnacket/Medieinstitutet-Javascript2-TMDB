@@ -31,6 +31,18 @@ export const getPopular = () => {
     `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
   );
 };
+
+export const getTodaysPopular = () => {
+  return get<IDataResult>(
+    `trending/movie/day?api_key=${API_KEY}${adultCont}&language=en-US`
+  );
+};
+
+export const getPopularWeek = () => {
+  return get<IDataResult>(
+    `trending/movie/week?api_key=${API_KEY}${adultCont}&language=en-US&`
+  );
+};
 export const getTop = () => {
   return get<IDataResult>(
     `movie/top_rated?api_key=${API_KEY}${adultCont}&language=en-US&page=$`

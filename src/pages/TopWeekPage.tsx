@@ -1,8 +1,8 @@
 import DataHandeling from '../components/DataMovieCard';
-//import { usePopular } from '../hooks/usePopularHook';
+import { useWeeksPopularMovies } from '../hooks/usePopularWeekHook'
 
-const Popular = () => {
-  //const { data, isError, isLoading, isSuccess } = usePopular();
+const PopularWeek = () => {
+  const { data, isError, isLoading, isSuccess } = useWeeksPopularMovies();
   return (
     <>
       <h1>POPULAR MOVIES</h1>
@@ -16,4 +16,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default PopularWeek;

@@ -1,31 +1,32 @@
 import React from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 type IProps = {
   id: number;
-  poster_path: string;
-  title: string;
+  profile_path: string;
+  name: string;
 };
 
-export const RowCard: React.FC<IProps> = ({ id, poster_path, title }) => {
+
+export const RowActorCard: React.FC<IProps> = ({ id, profile_path, name }) => {
+  console.log(id)
   return (
-    <Row xs={1} md={2} className="g-4">
-      <Col key={id}>
-        <Card as={Link} key={id} to={`/Movie/${id}`}>
+     <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
+      <Card as={Link} key={id} to={`/ActorPage/${id}`}>
           <Card.Img
             variant="top"
             src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w200/${poster_path}`
+              profile_path
+                ? `https://image.tmdb.org/t/p/w200/${profile_path}`
                 : 'https://cinemaone.net/images/movie_placeholder.png'
             }
           />
           <Card.Body>
-            <Card.Title>{title}</Card.Title>
+            <Card.Title>{name}</Card.Title>
           </Card.Body>
         </Card>
       </Col>
-    </Row>
   );
 };
+

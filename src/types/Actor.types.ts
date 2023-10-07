@@ -6,7 +6,7 @@ export interface IActorResponse {
   id: number, 
   known_for_department: string,
   name: string, 
-  profile_path: string, 
+  profile_path: string,
   credits: {
     cast: ICast []
   }
@@ -17,7 +17,7 @@ export interface ICast {
   id: number;
   title: string;
   overview: string;
-  poster_path: string;
+  poster_path: string,
   popularity: number;
   vote_average: number;
   vote_count: number;

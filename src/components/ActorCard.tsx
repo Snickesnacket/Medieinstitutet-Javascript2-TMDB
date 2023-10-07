@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Col } from 'react-bootstrap';
 
 
-interface IActorCardProp {
+interface IProps {
  biography: string, 
   birthday: string, 
   id: number, 
   known_for_department: string,
   name: string, 
-  profile_path: string | null
+  profile_path: string;
 }
 
-export const ActorCard: React.FC<IActorCardProp> = ({
+export const ActorCard: React.FC<IProps> = ({
   biography,
   birthday,
   id,
@@ -21,8 +22,8 @@ export const ActorCard: React.FC<IActorCardProp> = ({
   profile_path,
 }) => {
   return (
-    <Card className="m-2">
-        <Card.Link as={Link} to={`/actor/${id}`}>
+    <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
+        <Card as={Link} key={id} to={`/actor/${id}`}>
         <Card.Img
           variant="top"
           src={profile_path
@@ -30,7 +31,6 @@ export const ActorCard: React.FC<IActorCardProp> = ({
     : 'https://cinemaone.net/images/movie_placeholder.png'
   }
         />
-      </Card.Link>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{biography}</Card.Text>
@@ -42,5 +42,6 @@ export const ActorCard: React.FC<IActorCardProp> = ({
       <Card.Body>
       </Card.Body>
     </Card>
+    </Col>
   );
 };

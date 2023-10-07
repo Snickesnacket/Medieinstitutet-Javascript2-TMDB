@@ -16,12 +16,13 @@ const Genre = () => {
   const idValue = id ?? '';
   const pageNumber = Number(page);
 
-  const genres = useGenres();
+  const genres = useGenres(idValue);
   const { data, isError, isLoading, isSuccess } = useGenre(idValue, pageNumber);
 
   const selectedGenre = genres.find(
     (genre: IGenres) => genre.id === Number(idValue)
   );
+  console.log('name', selectedGenre?.name);
 
   return (
     <>

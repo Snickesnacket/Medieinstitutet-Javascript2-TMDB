@@ -1,8 +1,9 @@
-import { Alert, Container, ListGroup, Row, Spinner } from 'react-bootstrap';
+import { Alert,  ListGroup,  Row, Spinner } from 'react-bootstrap';
 import { ActorCard } from '../components/ActorCard';
 import { useParams } from 'react-router-dom';
 import { useActor } from '../hooks/useActorHook';
-import { RowCard } from '../components/RowActorCard';
+import { RowMovieCard } from '../components/MovieCard';
+
 type IdParam = {
   id: string;
 };
@@ -10,6 +11,8 @@ type IdParam = {
 export const Actor = () => {
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
+
+  console.log('value ocf id',idValue)
 
   const { data, isError, isLoading, isSuccess } = useActor(idValue);
 
@@ -26,34 +29,33 @@ export const Actor = () => {
         <>
           <h1>{data.name}</h1>
           <ListGroup className="mb-6">
-            <Container>
-              <Row>
+            <Row className="g-4">
                 <ActorCard
                   biography={data.biography}
                   birthday={data.birtday}
-                  id={data.id}
+                  id={data?.id}
                   known_for_department={data.known_for_department}
                   name={data.name}
-                  profile_path={data.profile_path}
+                  profile_path={data.profile_path ?? 'no profile picture '}
                 />
               </Row>
-            </Container>
             {isSuccess && data.credits.cast && (
-              <>
+              <Row className="g-4">
                 <h2>Also featured in: </h2>
                 {data.credits.cast.map((credit) => (
-                  <RowCard
+                  <RowMovieCard
                     key={credit.id}
                     id={credit.id}
-                    poster_path={credit.poster_path}
+                    poster_path={credit.poster_path ?? 'no profile picture'}
                     title={credit.title}
                   />
                 ))}
-              </>
+              </Row>
             )}
-          </ListGroup>
+                </ListGroup>
         </>
       )}
+  
     </>
   );
 };

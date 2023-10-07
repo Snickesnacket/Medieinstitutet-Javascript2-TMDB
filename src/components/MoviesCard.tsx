@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 interface IMovieCardProp {
-  poster_path?: string | null;
+  poster_path: string 
   title?: string;
   overview?: string | null;
   release_date?: string;

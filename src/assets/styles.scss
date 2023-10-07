@@ -7,3 +7,42 @@
 .navbar {
   background-color: cornflowerblue;
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+h1, h2 {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ff4757;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #1e90ff;
+}
+
+.Alert {
+  margin-bottom: 2rem;
+}
+
+.Spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.ListGroup {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.Row {
+  margin-top: 1.5rem;
+}
