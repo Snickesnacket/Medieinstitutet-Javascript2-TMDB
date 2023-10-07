@@ -5,12 +5,12 @@ import { Col } from 'react-bootstrap';
 
 
 interface IProps {
- biography: string, 
-  birthday: string, 
-  id: number, 
-  known_for_department: string,
-  name: string, 
-  profile_path: string;
+ biography?: string, 
+  birthday?: string, 
+  id?: number, 
+  known_for_department?: string,
+  name?: string, 
+  profile_path?: string;
 }
 
 export const ActorCard: React.FC<IProps> = ({
@@ -26,7 +26,7 @@ export const ActorCard: React.FC<IProps> = ({
         <Card as={Link} key={id} to={`/actor/${id}`}>
         <Card.Img
           variant="top"
-          src={profile_path
+          src={ profile_path && /\.(jpe?g|png|gif)$/i.test(profile_path)
     ? `https://image.tmdb.org/t/p/w200/${profile_path}`
     : 'https://cinemaone.net/images/movie_placeholder.png'
   }

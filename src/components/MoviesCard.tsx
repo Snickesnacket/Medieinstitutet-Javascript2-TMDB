@@ -25,7 +25,7 @@ const MovieCard: React.FC<IMovieCardProp> = ({
         <Card.Img
           variant="top"
           src={
-            poster_path
+            poster_path && /\.(jpe?g|png|gif)$/i.test(poster_path)
               ? `https://image.tmdb.org/t/p/w200/${poster_path}`
               : 'https://cinemaone.net/images/movie_placeholder.png'
           }

@@ -3,9 +3,9 @@ import { Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 type IProps = {
-  id: number;
-  profile_path: string;
-  name: string;
+  id?: number;
+  profile_path?: string
+  name?: string;
 };
 
 
@@ -17,7 +17,7 @@ export const RowActorCard: React.FC<IProps> = ({ id, profile_path, name }) => {
           <Card.Img
             variant="top"
             src={
-              profile_path
+              profile_path && /\.(jpe?g|png|gif)$/i.test(profile_path)
                 ? `https://image.tmdb.org/t/p/w200/${profile_path}`
                 : 'https://cinemaone.net/images/movie_placeholder.png'
             }

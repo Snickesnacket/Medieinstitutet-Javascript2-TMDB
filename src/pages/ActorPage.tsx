@@ -25,29 +25,30 @@ export const Actor = () => {
         </Spinner>
       )}
 
-      {isSuccess && data && (
+      {data && (
         <>
           <h1>{data.name}</h1>
           <ListGroup className="mb-6">
             <Row className="g-4">
                 <ActorCard
-                  biography={data.biography}
-                  birthday={data.birtday}
+                  key={data?.id}
+                  biography={data?.biography}
+                  birthday={data?.birtday}
                   id={data?.id}
                   known_for_department={data.known_for_department}
-                  name={data.name}
+                  name={data?.name}
                   profile_path={data.profile_path ?? 'no profile picture '}
                 />
               </Row>
-            {isSuccess && data.credits.cast && (
+            {isSuccess && data.credits?.cast && (
               <Row className="g-4">
                 <h2>Also featured in: </h2>
                 {data.credits.cast.map((credit) => (
                   <RowMovieCard
                     key={credit.id}
-                    id={credit.id}
+                    id={credit.id!}
                     poster_path={credit.poster_path ?? 'no profile picture'}
-                    title={credit.title}
+                    title={credit?.title}
                   />
                 ))}
               </Row>

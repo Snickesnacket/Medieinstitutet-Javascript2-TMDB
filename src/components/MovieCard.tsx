@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 type IProps = {
   id: number;
-  poster_path: string
-  title: string;
+  poster_path?:  string
+  title?: string;
 };
 
 export const RowMovieCard: React.FC<IProps> = ({ id, poster_path, title }) => {

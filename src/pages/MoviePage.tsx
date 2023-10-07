@@ -8,6 +8,7 @@ import { IActorResponse } from '../types/Actor.types';
 import useViewed from '../hooks/useViewedHook';
 import { LSContext, StoreDataType } from '../contexts/localstorageContext';
 import { useContext, useEffect } from 'react';
+import { IMovies } from '../types/Movies.types';
 
 type IdParam = {
   id: string;
@@ -54,15 +55,15 @@ return (
           </Container>
           <h2>The Cast</h2>
 
-          {isSuccess && data.credits?.cast && (
+          {data.credits?.cast && (
             <>
               <h2>Also featured in: </h2>
               <Row className="g-4">
-              {data?.credits?.cast.map((person: IActorResponse) => (
+              {data?.credits.cast.map((person: IActorResponse) => (
                 <RowActorCard
-                  id={person?.id}
+                  id={person.id!}
                   profile_path={person.profile_path ?? 'no profile picture '}
-                  name={person.name}
+                  name={person.name ?? 'this field is missing'}
                 />
               ))}
               </Row>
@@ -71,7 +72,7 @@ return (
           )}
           {viewed.length > 0 && (
             <Row className="g-4">
-            {viewed.map((movie: any) => (
+            {viewed.map((movie: IMovies) => (
                   <RowMovieCard
                     id={movie.id!}
                     poster_path={movie.poster_path ?? 'Poster is missing'}
@@ -84,7 +85,7 @@ return (
           <h2>Similar Movies</h2>
           {isSuccess && data.similar?.results && (
           <Row className="g-4">
-          {data.similar?.results.map((movie) => (
+          {data.similar?.results.map((movie: IMovies) => (
             <RowMovieCard
               id={movie.id!}
               poster_path={movie.poster_path ?? 'Poster is missing'}
@@ -97,7 +98,7 @@ return (
           <h2>Recently viewed</h2>
           {isSuccess && viewed && (
               <Row className="g-4">
-              {viewed.map((movie) => (
+              {viewed.map((movie: IMovies) => (
                 <RowMovieCard
                   id={movie.id!}
                   poster_path={movie.poster_path ?? 'Poster is missing'}
