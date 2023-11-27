@@ -7,22 +7,35 @@ interface IProps {
 
 export type StoreDataType = {
   viewed: IMovies[];
-  storeViewed: any;
+  storeViewedMovie: (title: string, id: number, poster_path?: string) => void;
 };
-export const LSContext = createContext<StoreDataType[] | any>(null);
+export const LSContext = createContext<StoreDataType>({
+  viewed: [],
+  storeViewedMovie: () => {}
+});
 
 export const LocalStorageContext = ({ children }: IProps) => {
   const [viewed, setViewed] = useState<IMovies[]>(() => {
     //set the value using the key 'visited-movies'
     const storedData = window.localStorage.getItem('viewed-movies');
+    console.log('stored data', storedData);
     return storedData ? JSON.parse(storedData) : [];
   });
 
-  const storedValue = (title: string, id: number, poster_path: string) => {
-    if (!viewed.some((movie: IMovies) => movie.id === id))
-      if (viewed.length >= 10) {
-        viewed.shift();
-      }
+  const storeViewedMovieInLocalStorage = (
+    title: string,
+    id: number,
+    poster_path?: string
+  ) => {
+    // check if the id exists in the array already,
+    if (viewed.some((movie: IMovies) => movie.id === id)) {
+      return;
+    }
+    // check length
+    if (viewed.length >= 10) {
+      viewed.shift();
+    }
+
     setViewed([...viewed, { title, id, poster_path }]);
   };
 
@@ -30,7 +43,9 @@ export const LocalStorageContext = ({ children }: IProps) => {
     window.localStorage.setItem('viewed-movies', JSON.stringify(viewed));
   }, [viewed]);
   return (
-    <LSContext.Provider value={{ viewed, storedValue }}>
+    <LSContext.Provider
+      value={{ viewed, storeViewedMovie: storeViewedMovieInLocalStorage }}
+    >
       {children}
     </LSContext.Provider>
   );
