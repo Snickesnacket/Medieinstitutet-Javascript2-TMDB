@@ -1,16 +1,16 @@
-#The Movie Data Base 
+# The Movie Data Base 
 
-##Betyg: VG 
+## Betyg: VG 
 
-##React, Typescript, React Query, React Router, Axios
+## React, Typescript, React Query, React Router, Axios
 
-#Beskrivning
+# Beskrivning
 Ni ska skapa ett gränssnitt mot The Movie DB (TMDB) där man ska kunna se vilka som är de senaste bioaktuella filmerna, de populäraste filmerna, och de topplistade filmerna i Sverige eller USA. Man ska även kunna bläddra efter filmer baserat på genre.
 
 Man ska också (varhelst en film visas) kunna klicka in på den och se information om filmen samt vilka skådespelare som medverkat. Det ska även gå att klicka in på en skådespelare och se vilka filmer hen har medverkat i.
 
 
-#Hygienkrav
+# Hygienkrav
 Nedan hygienkrav ska vara uppfyllda oavsett betygsnivå.
 
 Använda React, React Router och React Query
@@ -34,13 +34,13 @@ På samtliga ställen som en film eller skådespelare visas ska antingen filmens
 
 Webbläsarens bakåt/framåt-knappar ska fungera för att navigera på sidan. Det ska även gå att ladda om sidan och då återgå till samma vy som före omladdning!
 
-#Som besökare ska jag
+Som besökare ska jag
 kunna se vilka som är de 10-20 senaste (now playing) biofilmerna.
 kunna se vilka som är de 10-20 mest populära (trending) filmerna.
 kunna se vilka som är de 10-20 mest topplistade (top rated) filmerna.
 kunna bläddra efter filmer (med paginering) baserat på genre (man ska kunna se genrens titel).
 
-#Som besökare ska jag även
+Som besökare ska jag även
 kunna klicka in på en film och få detaljerad information om filmen.
 kunna klicka in på en film och få reda på vilka som var skådespelare i filmen.
 kunna klicka på en skådespelare och få detaljerad information om skådespelaren.
@@ -50,7 +50,7 @@ För godkänt krävs paginering bara på bläddringen av filmer baserat på genr
 
 Pagineringen måste överleva en omladdning av sidan!
 
-#Kravspecifikation VG
+# Kravspecifikation VG
 För väl godkänt krävs (förutom kraven för godkänt) att:
 
 Du använder dig av Custom Hooks på lämpliga ställen.
