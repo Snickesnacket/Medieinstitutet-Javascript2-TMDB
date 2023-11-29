@@ -4,7 +4,6 @@
 
 ## Betyg:VG 
 
-## app
 https://sensational-cocada-c4839c.netlify.app
 
 
