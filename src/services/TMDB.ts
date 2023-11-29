@@ -17,6 +17,8 @@ const instance = axios.create({
   }
 });
 
+
+
 const get = async <T>(endpoint: string) => {
   try {
     const response = await instance.get<T>(endpoint);
@@ -28,18 +30,18 @@ const get = async <T>(endpoint: string) => {
 
 export const getPopular = () => {
   return get<IDataResult>(
-    `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
+    `movie/popular?api_key=${API_KEY}${adultCont}&language=en-US&page=1`
   );
 };
 export const getTop = () => {
   return get<IDataResult>(
-    `movie/top_rated?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
+    `movie/top_rated?api_key=${API_KEY}${adultCont}&language=en-US$page=1`
   );
 };
 
 export const getNow = () => {
   return get<IDataResult>(
-    `movie/now_playing?api_key=${API_KEY}${adultCont}&language=en-US&page=$`
+    `movie/now_playing?api_key=${API_KEY}${adultCont}&language=en-US&page=1`
   );
 };
 
