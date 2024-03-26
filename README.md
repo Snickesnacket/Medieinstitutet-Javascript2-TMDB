@@ -1,5 +1,4 @@
 # The Movie Data Base 
-
 ## React, Typescript, Axios, React Router och React Query
 
 ## Betyg:VG 
