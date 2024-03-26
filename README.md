@@ -7,6 +7,7 @@ https://sensational-cocada-c4839c.netlify.app
 
 
  ## Beskrivning
+ Ni behöver inte lägga tid på design för uppgiften 
 Ni ska skapa ett gränssnitt mot The Movie DB (TMDB) där man ska kunna se vilka som är de senaste bioaktuella filmerna, de populäraste filmerna, och de topplistade filmerna i Sverige (eller USA, välj själv). Man ska även kunna bläddra efter filmer baserat på genre.
 
 Man ska också (varhelst en film visas) kunna klicka in på den och se information om filmen samt vilka skådespelare som medverkat. Det ska även gå att klicka in på en skådespelare och se vilka filmer hen har medverkat i.
