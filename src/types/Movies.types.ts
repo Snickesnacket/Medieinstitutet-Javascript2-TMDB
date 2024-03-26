@@ -11,7 +11,7 @@ export interface IMovies {
   genres_ids?: IGenres[];
   id?: number;
   overview?: string | null;
-  poster_path:  string | null;
+  poster_path: string;
   revenue?: number;
   release_date?: string;
   similar?: {

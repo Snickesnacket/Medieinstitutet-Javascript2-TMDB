@@ -17,7 +17,6 @@ type IdParam = {
 const Movie = () => {
   const { viewed }: StoreDataType = useViewed();
   const { storedValue } = useContext(LSContext);
-  console.log(viewed);
   const { id } = useParams<IdParam>();
   const idValue = id ?? '';
 
